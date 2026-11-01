@@ -22,3 +22,10 @@ Move the three `wp_enqueue_*` calls to `wp_register_*`, enqueue them only inside
 - Read the code only, unless a finding says "Verified". No automated tests exist in this repo.
 - Chrome-only and WordPress 7.1.3 on Local where something was run.
 - This plugin is not one of the 22 standalone plugins; I could not tell from the repo whether it is still shipped anywhere.
+
+## Fix branch
+Branch `fix/front-end-assets`, pushed to the fork `suhaeel/call-to-action`. Based on the default branch; the default branch itself is untouched.
+
+Registers the frontend script and the three stylesheets instead of enqueuing them on `init`, passes them to `register_block_type()`, drops the `wp-editor` dependency and uses a file-time version.
+
+Tested on the Local site, plugin alone: home page 55 scripts and 3 styles before, **1 script and 0 styles after**. A page with the block loads `frontend.js`, `style-index.css` and `font-awesome5.css` (4 scripts, 2 styles). In the editor the block is registered, can be inserted, is valid, and the same stylesheets load before and after.
